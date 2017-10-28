@@ -1,0 +1,66 @@
+{
+	"schema":"1.0",
+	"title":"Manage Places",
+	"category":"albums",
+	"privilege":"*",
+	"blocked":false,
+	"rowlink":false,
+	"rowsPerPage":20,
+	"showExtraColumn":false,
+	"custombar":false,
+	"source":{
+		"type":"sql",
+		"table":"do_seo",
+		"sort":"id desc",
+		"limit":10
+	},
+	"datagrid":{
+		"id":{
+			"label":"ID",
+			"hidden":false,
+			"searchable":true,
+			"sortable":true,
+			"groupable":false,
+			"classes":"",
+			"style":"width:50px;",
+			"formatter":"text"
+		},
+		"page_URI":{
+			"label":"URL",
+			"searchable":true
+		},
+		"page_slug":{
+			"label":"Slug",
+			"searchable":true,
+			"hidden":true
+		},
+		"title":{
+			"label":"Title",
+			"searchable":true
+		},
+		"descs":{
+			"label":"Description",
+			"searchable":true,
+			"hidden":true
+		},
+		"keywords":{
+			"label":"Keywords",
+			"searchable":true,
+			"hidden":true
+		},
+		"blocked":{
+			"label":"Blocked",
+			"hidden":true,
+			"searchable":true
+		},
+		"edited_by":{
+			"label":"Updated By",
+			"hidden":true
+		},
+		"edited_on":{
+			"label":"Updated On",
+			"hidden":true,
+			"formatter":"date"
+		}
+	}
+}

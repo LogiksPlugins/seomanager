@@ -1,0 +1,39 @@
+{
+	"postsubmit": {
+
+	},
+	"source": {
+		"type": "sql",
+		"table": "do_seo",
+		"where": ["id"]
+	},
+	"fields": {
+		"page_URI": {
+			"label": "Place Path (After http://www.placpic.com/)",
+			"required": true
+		},
+		"page_slug": {
+			"label": "Slug"
+		},
+		"title": {
+			"label": "Title",
+			"required": true
+		},
+		"keywords": {
+			"label": "Keywords"
+		},
+		"descs": {
+			"label": "Description",
+			"type":"text"
+		},
+		"blocked": {
+			"label": "Blocked",
+			"type": "select",
+			"options": {
+				"true": "True",
+				"false": "False"
+			},
+			"required": true
+		}
+	}
+}

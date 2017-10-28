@@ -1,0 +1,28 @@
+{
+    "name": "Logiks SEO module",
+    "version": "1.0.0",
+    "status": "stable",
+    "type": "module",
+    "package":"olgks.seomanager",
+    "description": "Manage SEO tags for logiks apps with ease.  One robust solution for all your SEO needs.",
+    "keywords": "logiks,modules,cms,seo,website",
+    "license": "MIT",
+    "marketid": "",
+    "homepage": "https://github.com/LogiksPlugins/seomanager",
+    "bugs": "https://github.com/LogiksPlugins/seomanager/issues",
+    "private": false,
+    "dependencies": {
+        "core": "+4.0.0",
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/LogiksPlugins/seomanager.git"
+    },
+    "authors": [
+        {
+            "name": "OpenLogiks Team",
+            "email": "admin@openlogiks.org",
+            "authorid":"olgksadmin"
+        }
+    ]
+}
