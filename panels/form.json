@@ -9,22 +9,34 @@
 	},
 	"fields": {
 		"page_URI": {
-			"label": "Place Path (After http://www.placpic.com/)",
+			"label": "Page URI (Start with /)",
 			"required": true
 		},
 		"page_slug": {
-			"label": "Slug"
+			"label": "Page Slug (optional)"
 		},
 		"title": {
-			"label": "Title",
+			"label": "Page Title",
 			"required": true
 		},
 		"keywords": {
-			"label": "Keywords"
+			"label": "Page Keywords"
 		},
 		"descs": {
-			"label": "Description",
-			"type":"text"
+			"label": "Page Description",
+			"type":"text",
+			"width":12
+		},
+		"robots":{
+			"label": "Page Robot (Leave blank for default)"
+		},
+		"featured_video":{
+			"label": "Featured Video URI",
+			"type":"url"
+		},
+		"featured_image":{
+			"label": "Featured Image URI",
+			"type":"attachment"
 		},
 		"blocked": {
 			"label": "Blocked",
@@ -33,7 +45,8 @@
 				"true": "True",
 				"false": "False"
 			},
-			"required": true
+			"required": true,
+			"vmode":"edit"
 		}
 	}
 }

@@ -1,7 +1,7 @@
 {
 	"schema":"1.0",
-	"title":"Manage Places",
-	"category":"albums",
+	"title":"SEO Manager",
+	"category":"Advanced Tools",
 	"privilege":"*",
 	"blocked":false,
 	"rowlink":false,

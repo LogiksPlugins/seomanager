@@ -6,7 +6,7 @@ $type=$slug['subtype'];
 
 if($type==null || strlen($type)<=0){
     $type="panels";
-	header("Location:"._link("modules/cmsSeo/panels"));
+	header("Location:"._link("modules/seomanager/panels"));
 	return;
     
 }
@@ -22,6 +22,7 @@ $report=$basePath."report.json";
 $form=$basePath."form.json";
 //echo $report;
 loadModule("datagrid");
+
 ?>
 <style>
 .formbox .formbox-content {
@@ -34,7 +35,7 @@ loadModule("datagrid");
 <div class='col-xs-12 col-md-12 col-lg-12'>
 	<div class='row'>
 		<?php
-			printDataGrid($report,$form,$form,["slug"=>"module/subtype/type/refid","glink"=>_link("modules/cmsSeo/{$type}")],"app");
+			printDataGrid($report,$form,$form,["slug"=>"module/subtype/type/refid","glink"=>_link("modules/seomanager/{$type}")],"app");
 		?>
 	</div>
 </div>
