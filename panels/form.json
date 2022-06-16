@@ -1,7 +1,4 @@
 {
-	"postsubmit": {
-
-	},
 	"source": {
 		"type": "sql",
 		"table": "do_seo",
@@ -16,14 +13,13 @@
 			"label": "Page Slug (optional)"
 		},
 		"title": {
-			"label": "Page Title",
-			"required": true
+			"label": "Page Title (Leave Blank to Take it form Page Data)"
 		},
 		"keywords": {
-			"label": "Page Keywords"
+			"label": "Page Keywords (Leave Blank to Take it form Page Data)"
 		},
 		"descs": {
-			"label": "Page Description",
+			"label": "Page Description (Leave Blank to Take it form Page Data)",
 			"type":"text",
 			"width":12
 		},
@@ -32,11 +28,23 @@
 		},
 		"featured_video":{
 			"label": "Featured Video URI",
+			"group": "media",
 			"type":"url"
 		},
 		"featured_image":{
 			"label": "Featured Image URI",
+			"group": "media",
 			"type":"attachment"
+		},
+		"meta_addons": {
+			"label": "Additional Metas",
+			"group": "more",
+			"type":"textarea"
+		},
+		"seo_schema": {
+			"label": "SEO Schema",
+			"group": "more",
+			"type":"textarea"
 		},
 		"blocked": {
 			"label": "Blocked",

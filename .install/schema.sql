@@ -9,6 +9,8 @@ CREATE TABLE `do_seo` (
    `robots` varchar(70) DEFAULT '',
    `featured_image` varchar(250) DEFAULT '',
    `featured_video` varchar(250) DEFAULT '',
+   `seo_schema` text, 
+   `meta_addons` text,
    `blocked` enum('false','true') not null default 'false',
    `created_on` datetime not null,
    `created_by` varchar(255) not null,

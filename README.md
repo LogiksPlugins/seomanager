@@ -10,8 +10,15 @@ Follows the article https://moz.com/blog/meta-data-templates-123
 
 
 ```
-{pluginComponent src='seomanager.seo'}
+{pluginComponent src='seomanager.headers'}
 ```
+
+OR 
+
+```
+{pluginComponent src='seomanager.meta'}
+```
+
 
 This will allow the SEO Manager to alter the SEO Factors for the system.
 
@@ -20,15 +27,13 @@ This will allow the SEO Manager to alter the SEO Factors for the system.
 + Page Title
 + Page Description
 + Page Keywords
-
-
-### Upcoming
 + Page Robots
 
-+ Page Viewport
-
-+ OG Tabs
++ Facebook OG Tags
 + Twitter Tags
 + Google Plus Tags
 
+
+### Upcoming
++ Page Viewport
 + More Advanced Tags

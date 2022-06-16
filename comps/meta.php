@@ -1,9 +1,14 @@
 <?php
 if(!defined('ROOT')) exit('No direct script access allowed');
 
+//printArray($_ENV['PAGECONFIG']);
+
 // $_ENV['PAGECONFIG']['robot']
 $title=$_ENV['PAGECONFIG']['title'];
 $descs=$_ENV['PAGECONFIG']['description'];
+
+$metaAddons = "";
+$seoSchema = "";
 
 if(isset($_ENV['PAGECONFIG']['keywords'])) $keywords=$_ENV['PAGECONFIG']['keywords'];
 else $keywords= "";
@@ -48,11 +53,6 @@ $slugURI=implode("/",array_keys($slug));
 $slugVAL=implode("/",array_values($slug));
 
 $sqlData=_db()->_selectQ("do_seo","*",["blocked"=>'false',"page_URI"=>"/".PAGE])->_GET();//"/{$pageURI}"
-// var_dump($sqlData);
-//,"page_slug"=>"{$slugURI}"
-// echo _db()->_selectQ("do_seo","*",["blocked"=>'false',"page_URI"=>"/".PAGE])->_SQL();
-// printArray($slug);
-// exit(PAGE);
 
 if(count($sqlData)>1) {
     $foundData = false;
@@ -64,8 +64,20 @@ if(count($sqlData)>1) {
     if($foundData) {
         $sqlData = $foundData;
     } else {
-        $sqlData = $sqlData[0];
+        if(getFeature("SEO_USE_PAGE_TREE")=="true") {
+            $sqlData = $sqlData[0];
+        } else {
+            return;
+        }
     }
+
+    if(!$sqlData['title']) $sqlData['title'] = $title;
+    if(!$sqlData['descs']) $sqlData['descs'] = $descs;
+    if(!$sqlData['keywords']) $sqlData['keywords'] = $keywords;
+    if(!$sqlData['robots']) $sqlData['robots'] = $robot;
+
+    if($sqlData['meta_addons']) $metaAddons = $sqlData['meta_addons'];
+    if($sqlData['seo_schema']) $seoSchema = $sqlData['seo_schema'];
 
     $title=str_replace("{","#",str_replace("}","#",$sqlData['title']));
     $descs=str_replace("{","#",str_replace("}","#",$sqlData['descs']));
@@ -75,6 +87,15 @@ if(count($sqlData)>1) {
     $featuredVideo=str_replace("{","#",str_replace("}","#",$sqlData['featured_video']));
 } elseif(count($sqlData)==1) {
     $sqlData=$sqlData[0];
+
+    if(!$sqlData['title']) $sqlData['title'] = $title;
+    if(!$sqlData['descs']) $sqlData['descs'] = $descs;
+    if(!$sqlData['keywords']) $sqlData['keywords'] = $keywords;
+    if(!$sqlData['robots']) $sqlData['robots'] = $robot;
+
+    if($sqlData['meta_addons']) $metaAddons = $sqlData['meta_addons'];
+    if($sqlData['seo_schema']) $seoSchema = $sqlData['seo_schema'];
+
 
     $title=str_replace("{","#",str_replace("}","#",$sqlData['title']));
     $descs=str_replace("{","#",str_replace("}","#",$sqlData['descs']));
@@ -101,18 +122,31 @@ if($featuredVideo && strlen($featuredVideo)>0) {
     }
 }
 
+$pageConfig=$_ENV['PAGECONFIG']['meta'];
+if($pageConfig && is_array($pageConfig)) {
+    $metaAddons.="\n";
+    foreach($pageConfig as $meta) {
+        $metaAddons.="<meta ";
+
+        foreach ($meta as $key => $value) {
+          $metaAddons .= "{$key}=\"{$value}\" ";
+        }
+
+        $metaAddons .= " />\n";
+    }
+}
+
 $url=_url();//SiteLocation.$_SERVER['REQUEST_PATH'];
 
 $seoFacebook = getFeature("SEO_ENABLE_FACEBOOK","seomanager");
 $seoTwitter = getFeature("SEO_ENABLE_TWITTER","seomanager");
 $seoGoogle = getFeature("SEO_ENABLE_GOOGLE_PLUS","seomanager");
-?>
-<!-- start: SEOMETADATA -->
-<title><?=$title?></title>
-<meta name='description' content='<?=$descs?>' />
-<meta name='keywords' content='<?=$keywords?>' />
-<meta name='robots' content='<?=$robot?>' />
 
+?>
+
+<?=$metaAddons?>
+
+<!-- start: SEOMETADATA -->
 <?php
     if($seoFacebook===true || $seoFacebook=="true") {
         $facebookID = getFeature("FACEBOOK_APP_ID","seomanager");
@@ -167,3 +201,5 @@ $seoGoogle = getFeature("SEO_ENABLE_GOOGLE_PLUS","seomanager");
     }
 ?>
 <!-- end: SEOMETADATA -->
+
+<?=$seoSchema?>
