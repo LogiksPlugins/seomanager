@@ -141,12 +141,20 @@ $url=_url();//SiteLocation.$_SERVER['REQUEST_PATH'];
 $seoFacebook = getFeature("SEO_ENABLE_FACEBOOK","seomanager");
 $seoTwitter = getFeature("SEO_ENABLE_TWITTER","seomanager");
 $seoGoogle = getFeature("SEO_ENABLE_GOOGLE_PLUS","seomanager");
+
+$showOnlyMeta = getFeature("SEO_SHOW_ONLY_META","seomanager");
+
+echo "<!-- start: SEOMETADATA -->\n";
+
+if($showOnlyMeta!="true") {
 ?>
-<!-- start: SEOMETADATA -->
 <title><?=$title?></title>
 <meta name='description' content='<?=$descs?>' />
 <meta name='keywords' content='<?=$keywords?>' />
 <meta name='robots' content='<?=$robot?>' />
+<?php
+}
+?>
 
 <?=$metaAddons?>
 
