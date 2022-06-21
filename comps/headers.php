@@ -54,55 +54,57 @@ $slugVAL=implode("/",array_values($slug));
 
 $sqlData=_db()->_selectQ("do_seo","*",["blocked"=>'false',"page_URI"=>"/".PAGE])->_GET();//"/{$pageURI}"
 
-if(count($sqlData)>1) {
-    $foundData = false;
-    foreach ($sqlData as $key => $record) {
-        if(strtolower($record['page_slug'])==strtolower($slugURI)) {
-            $foundData = $record;
+if($sqlData) {
+    if(count($sqlData)>1) {
+        $foundData = false;
+        foreach ($sqlData as $key => $record) {
+            if(strtolower($record['page_slug'])==strtolower($slugURI)) {
+                $foundData = $record;
+            }
         }
-    }
-    if($foundData) {
-        $sqlData = $foundData;
-    } else {
-        if(getFeature("SEO_USE_PAGE_TREE")=="true") {
-            $sqlData = $sqlData[0];
+        if($foundData) {
+            $sqlData = $foundData;
         } else {
-            return;
+            if(getFeature("SEO_USE_PAGE_TREE")=="true") {
+                $sqlData = $sqlData[0];
+            } else {
+                return;
+            }
         }
+
+        if(!$sqlData['title']) $sqlData['title'] = $title;
+        if(!$sqlData['descs']) $sqlData['descs'] = $descs;
+        if(!$sqlData['keywords']) $sqlData['keywords'] = $keywords;
+        if(!$sqlData['robots']) $sqlData['robots'] = $robot;
+
+        if($sqlData['meta_addons']) $metaAddons = $sqlData['meta_addons'];
+        if($sqlData['seo_schema']) $seoSchema = $sqlData['seo_schema'];
+
+        $title=str_replace("{","#",str_replace("}","#",$sqlData['title']));
+        $descs=str_replace("{","#",str_replace("}","#",$sqlData['descs']));
+        $keywords=str_replace("{","#",str_replace("}","#",$sqlData['keywords']));
+        if(strlen($sqlData['robots'])>0) $robot=str_replace("{","#",str_replace("}","#",$sqlData['robots']));
+        $featuredImage=str_replace("{","#",str_replace("}","#",$sqlData['featured_image']));
+        $featuredVideo=str_replace("{","#",str_replace("}","#",$sqlData['featured_video']));
+    } elseif(count($sqlData)==1) {
+        $sqlData=$sqlData[0];
+
+        if(!$sqlData['title']) $sqlData['title'] = $title;
+        if(!$sqlData['descs']) $sqlData['descs'] = $descs;
+        if(!$sqlData['keywords']) $sqlData['keywords'] = $keywords;
+        if(!$sqlData['robots']) $sqlData['robots'] = $robot;
+
+        if($sqlData['meta_addons']) $metaAddons = $sqlData['meta_addons'];
+        if($sqlData['seo_schema']) $seoSchema = $sqlData['seo_schema'];
+
+
+        $title=str_replace("{","#",str_replace("}","#",$sqlData['title']));
+        $descs=str_replace("{","#",str_replace("}","#",$sqlData['descs']));
+        $keywords=str_replace("{","#",str_replace("}","#",$sqlData['keywords']));
+        if(strlen($sqlData['robots'])>0) $robot=str_replace("{","#",str_replace("}","#",$sqlData['robots']));
+        $featuredImage=str_replace("{","#",str_replace("}","#",$sqlData['featured_image']));
+        $featuredVideo=str_replace("{","#",str_replace("}","#",$sqlData['featured_video']));
     }
-
-    if(!$sqlData['title']) $sqlData['title'] = $title;
-    if(!$sqlData['descs']) $sqlData['descs'] = $descs;
-    if(!$sqlData['keywords']) $sqlData['keywords'] = $keywords;
-    if(!$sqlData['robots']) $sqlData['robots'] = $robot;
-
-    if($sqlData['meta_addons']) $metaAddons = $sqlData['meta_addons'];
-    if($sqlData['seo_schema']) $seoSchema = $sqlData['seo_schema'];
-
-    $title=str_replace("{","#",str_replace("}","#",$sqlData['title']));
-    $descs=str_replace("{","#",str_replace("}","#",$sqlData['descs']));
-    $keywords=str_replace("{","#",str_replace("}","#",$sqlData['keywords']));
-    if(strlen($sqlData['robots'])>0) $robot=str_replace("{","#",str_replace("}","#",$sqlData['robots']));
-    $featuredImage=str_replace("{","#",str_replace("}","#",$sqlData['featured_image']));
-    $featuredVideo=str_replace("{","#",str_replace("}","#",$sqlData['featured_video']));
-} elseif(count($sqlData)==1) {
-    $sqlData=$sqlData[0];
-
-    if(!$sqlData['title']) $sqlData['title'] = $title;
-    if(!$sqlData['descs']) $sqlData['descs'] = $descs;
-    if(!$sqlData['keywords']) $sqlData['keywords'] = $keywords;
-    if(!$sqlData['robots']) $sqlData['robots'] = $robot;
-
-    if($sqlData['meta_addons']) $metaAddons = $sqlData['meta_addons'];
-    if($sqlData['seo_schema']) $seoSchema = $sqlData['seo_schema'];
-
-
-    $title=str_replace("{","#",str_replace("}","#",$sqlData['title']));
-    $descs=str_replace("{","#",str_replace("}","#",$sqlData['descs']));
-    $keywords=str_replace("{","#",str_replace("}","#",$sqlData['keywords']));
-    if(strlen($sqlData['robots'])>0) $robot=str_replace("{","#",str_replace("}","#",$sqlData['robots']));
-    $featuredImage=str_replace("{","#",str_replace("}","#",$sqlData['featured_image']));
-    $featuredVideo=str_replace("{","#",str_replace("}","#",$sqlData['featured_video']));
 }
 
 if($featuredImage && strlen($featuredImage)>0) {
