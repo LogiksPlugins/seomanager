@@ -124,6 +124,8 @@ if($featuredVideo && strlen($featuredVideo)>0) {
     }
 }
 
+if(!isset($_ENV['PAGECONFIG']['meta'])) $_ENV['PAGECONFIG']['meta'] = [];
+
 $pageConfig=$_ENV['PAGECONFIG']['meta'];
 if($pageConfig && is_array($pageConfig)) {
     $metaAddons.="\n";
