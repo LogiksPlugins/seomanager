@@ -11,6 +11,9 @@
 	"source":{
 		"type":"sql",
 		"table":"do_seo",
+		"where": {
+			"for_site": "#CMS_SITENAME#"
+		},
 		"sort":"id desc",
 		"limit":10
 	},
