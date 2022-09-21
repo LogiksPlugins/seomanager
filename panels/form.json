@@ -4,6 +4,9 @@
 		"table": "do_seo",
 		"where": ["id"]
 	},
+	"forcefill": {
+		"for_site": "#CMS_SITENAME#"
+	},
 	"fields": {
 		"page_URI": {
 			"label": "Page URI (Start with /)",
