@@ -52,7 +52,7 @@ foreach($slug as $a=>$b) {
 $slugURI=implode("/",array_keys($slug));
 $slugVAL=implode("/",array_values($slug));
 
-$sqlData=_db()->_selectQ("do_seo","*",["blocked"=>'false',"page_URI"=>"/".PAGE])->_GET();//"/{$pageURI}"
+$sqlData=_db()->_selectQ("do_seo","*",["blocked"=>'false',"page_URI"=>"/".PAGE, "for_site"=>SITENAME])->_GET();//"/{$pageURI}"
 
 if($sqlData) {
     if(count($sqlData)>1) {
